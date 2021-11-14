@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class TrapController : MonoBehaviour
 {
-    [SerializeField] private float startSpawn = 1f;
-    [SerializeField] private float delaySpawn = 1f;
-    [SerializeField] GameObject TrapArrow;
     // Start is called before the first frame update
+    //public GameObject enemyPrefab;
+    public GameObject[] disparoPrefabs;
+    public float startDelay = 2;
+    public float spawnInterval = 1.5f;
+    public Vector3 scale;
+
     void Start()
     {
-        Arrows();
+        InvokeRepeating("Disparo", startDelay, spawnInterval);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //if (Input.GetButton("Fire1"))
+        //{
+       //     Disparo();
+       // }
+
     }
-    private void Arrows()
+
+    void Disparo()
     {
-        Instantiate(TrapArrow, transform);
+        int disparoIndex = Random.Range(0, disparoPrefabs.Length);
+        Instantiate(disparoPrefabs[disparoIndex], transform.position, disparoPrefabs[disparoIndex].transform.rotation);
     }
+
 }
